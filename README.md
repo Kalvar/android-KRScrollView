@@ -3,7 +3,7 @@ android-KRScrollView
 
 No use viewPager present photos and scroll page by page, just directly extends HorizontalScrollView and overrides.
 
-In currently that only implemented HorizontalScrollView and easy scrolling page by page, in the future will implement more features when I'm free.
+In currently that only implemented HorizontalScrollView and easy swipe page by page, in the future will implement more features when I'm free.
 
 ``` java
 import pers.kalvar.tools.scrollview.KRScrollView;
