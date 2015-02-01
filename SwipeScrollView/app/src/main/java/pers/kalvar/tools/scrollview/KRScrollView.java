@@ -3,10 +3,13 @@ package pers.kalvar.tools.scrollview;
 import java.util.ArrayList;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.HorizontalScrollView;
 
 public class KRScrollView extends HorizontalScrollView {
@@ -220,4 +223,44 @@ public class KRScrollView extends HorizontalScrollView {
         }
         return false;
     }
+
+    /**
+     * According to screen size to auto-fit and resize scrollView
+     * */
+    public void autoResize(){
+
+        DisplayMetrics metrics  = this.getResources().getDisplayMetrics();
+
+        //offset the screen width ( it seems required ).
+        float dp                = 20.0f;
+        int offsetScreenWidth   = (int) (metrics.density * dp + 0.5f);
+
+        //offset the scrollbar width
+        int offsetBarWidth      = 10;
+
+        //Google defined the default width and height ratio of better.
+        int googleDefaultWidth  = 1024;
+        int googleDefaultHeight = 500;
+
+        //Default screen 比例 : 1024 : 500 = Screen Width Pixel : x = 360 dp : x
+        //(int)( ( dm.widthPixels / dm.scaledDensity ) / ( 1024 / 500 ) );
+        int fitPxHeight = (int)(metrics.widthPixels / ( googleDefaultWidth / googleDefaultHeight )) + offsetScreenWidth + offsetBarWidth;
+
+        //Reset the layout of scrollView
+        ViewGroup.LayoutParams layoutParams = this.getLayoutParams();
+        layoutParams.height                 = fitPxHeight;
+        this.setLayoutParams(layoutParams);
+
+    }
+
+    /**
+     * DP convert to Pixel
+     * @param dpValue
+     * */
+    public int dpConvertToPixel(float dpValue){
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpValue, this.getResources().getDisplayMetrics());
+    }
+
+
+
 }
