@@ -261,6 +261,25 @@ public class KRScrollView extends HorizontalScrollView {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpValue, this.getResources().getDisplayMetrics());
     }
 
+    /**
+     * Print screen DIP information
+     * @param windowManager
+     * */
+    public void printScreenDip(WindowManager windowManager){
+        //Resize the ScrollView to dynamic fit different screen resolutions.
+        DisplayMetrics dm = new DisplayMetrics();
+        //windowManager.getDefaultDisplay().getMetrics(dm);
 
+        String strScreenDIP = "";
+        strScreenDIP += "The logical density of the display: " + dm.density + "\n";
+        strScreenDIP += "The screen density expressed as dots-per-inch: " + dm.densityDpi +"\n";
+        strScreenDIP += "The absolute height of the display in pixels: " + dm.heightPixels +"\n";
+        strScreenDIP += "The absolute width of the display in pixels: " + dm.widthPixels + "\n";
+        strScreenDIP += "A scaling factor for fonts displayed on the display: " + dm.scaledDensity + "\n";
+        strScreenDIP += "The exact physical pixels per inch of the screen in the X dimension: " + dm.xdpi + "\n";
+        strScreenDIP += "The exact physical pixels per inch of the screen in the Y dimension: " + dm.ydpi + "\n";
+
+        Log.d("DIP", strScreenDIP);
+    }
 
 }
